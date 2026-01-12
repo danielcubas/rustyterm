@@ -55,6 +55,10 @@ Click the menu icon (top right corner) and select a theme:
 |----------|--------|
 | `Ctrl+Shift+T` | New tab |
 | `Ctrl+Shift+W` | Close current tab |
+| `Ctrl+Shift+C` | Copy selection |
+| `Ctrl+Shift+V` | Paste from clipboard |
+
+**Tip:** Right-click on the terminal to access the context menu with Copy and Paste options.
 
 ## Configuration
 
