@@ -8,6 +8,7 @@ use std::cell::RefCell;
 use std::rc::Rc;
 
 use crate::config::Config;
+use crate::resize::setup_resize_handlers;
 use crate::tab::Tab;
 use crate::theme::{get_theme_by_name, get_themes};
 
@@ -27,6 +28,7 @@ impl RustyTermWindow {
             .title("RustyTerm")
             .default_width(config.borrow().window_width)
             .default_height(config.borrow().window_height)
+            .resizable(true)
             .build();
 
         let notebook = Notebook::new();
@@ -58,6 +60,9 @@ impl RustyTermWindow {
             config,
             tabs,
         };
+
+        // Setup window border resize handlers
+        setup_resize_handlers(&win.window);
 
         // Add first tab
         win.add_tab();

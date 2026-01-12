@@ -1,5 +1,6 @@
 mod app;
 mod config;
+mod resize;
 mod tab;
 mod terminal;
 mod theme;
