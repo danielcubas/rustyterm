@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=RustyTerm
+Comment=Terminal emulator written in Rust
+Exec=rustyterm
+Icon=utilities-terminal
+Terminal=false
+Type=Application
+Categories=System;TerminalEmulator;
+Keywords=terminal;shell;console;command;

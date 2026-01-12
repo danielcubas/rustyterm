@@ -1,0 +1,28 @@
+[package]
+name = "rustyterm"
+version = "0.1.0"
+edition = "2024"
+description = "A terminal emulator written in Rust with GTK4"
+authors = ["Daniel"]
+license = "MIT"
+
+[dependencies]
+gtk4 = "0.9"
+gdk4 = "0.9"
+vte4 = "0.8"
+glib = "0.20"
+gio = "0.20"
+serde = { version = "1.0", features = ["derive"] }
+toml = "0.8"
+dirs = "5.0"
+
+[package.metadata.deb]
+maintainer = "Daniel"
+copyright = "2026"
+depends = "libgtk-4-1, libvte-2.91-gtk4-0"
+section = "utility"
+priority = "optional"
+assets = [
+    ["target/release/rustyterm", "usr/bin/", "755"],
+    ["data/rustyterm.desktop", "usr/share/applications/", "644"],
+]
