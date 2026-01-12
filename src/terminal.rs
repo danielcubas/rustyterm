@@ -78,4 +78,16 @@ impl TerminalWidget {
         self.terminal.current_directory_uri()
             .map(|uri| uri.to_string())
     }
+
+    pub fn copy_clipboard(&self) {
+        self.terminal.copy_clipboard_format(vte4::Format::Text);
+    }
+
+    pub fn paste_clipboard(&self) {
+        self.terminal.paste_clipboard();
+    }
+
+    pub fn has_selection(&self) -> bool {
+        self.terminal.has_selection()
+    }
 }
