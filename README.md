@@ -1,60 +1,60 @@
 # RustyTerm
 
-Um emulador de terminal moderno e leve para Linux.
+A modern and lightweight terminal emulator for Linux.
 
-## Sobre
+## About
 
-RustyTerm é um terminal simples e eficiente com suporte a múltiplas abas e temas de cores personalizáveis.
+RustyTerm is a simple and efficient terminal with multiple tabs support and customizable color themes.
 
-## Instalação
+## Installation
 
 ### Ubuntu/Debian
 
 ```bash
-sudo dpkg -i rustyterm_0.1.0_amd64.deb
+sudo dpkg -i rustyterm_0.1.0-1_amd64.deb
 ```
 
-Após a instalação, o RustyTerm estará disponível no menu de aplicativos ou pode ser iniciado pelo terminal:
+After installation, RustyTerm will be available in the application menu or can be launched from terminal:
 
 ```bash
 rustyterm
 ```
 
-## Funcionalidades
+## Features
 
-- Múltiplas abas em uma única janela
-- 4 temas de cores incluídos
-- Configuração automática salva
-- Títulos de aba dinâmicos
-- Reordenação de abas com arrastar e soltar
+- Multiple tabs in a single window
+- 4 built-in color themes
+- Auto-saved configuration
+- Dynamic tab titles
+- Drag and drop tab reordering
 
-## Como Usar
+## Usage
 
-### Abas
+### Tabs
 
-- **Nova aba**: Clique no botão `+` ou pressione `Ctrl+Shift+T`
-- **Fechar aba**: Clique no `X` da aba ou pressione `Ctrl+Shift+W`
-- **Reordenar**: Arraste a aba para a posição desejada
+- **New tab**: Click the `+` button or press `Ctrl+Shift+T`
+- **Close tab**: Click the tab's `X` or press `Ctrl+Shift+W`
+- **Reorder**: Drag the tab to the desired position
 
-### Temas
+### Themes
 
-Clique no ícone de menu (canto superior direito) e selecione um tema:
+Click the menu icon (top right corner) and select a theme:
 
-- **default** - Tema escuro (Catppuccin)
-- **light** - Tema claro
+- **default** - Dark theme (Catppuccin)
+- **light** - Light theme
 - **solarized_dark** - Solarized Dark
 - **dracula** - Dracula
 
-## Atalhos de Teclado
+## Keyboard Shortcuts
 
-| Atalho | Ação |
-|--------|------|
-| `Ctrl+Shift+T` | Nova aba |
-| `Ctrl+Shift+W` | Fechar aba atual |
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl+Shift+T` | New tab |
+| `Ctrl+Shift+W` | Close current tab |
 
-## Configuração
+## Configuration
 
-As configurações são salvas automaticamente em `~/.config/rustyterm/config.toml`:
+Settings are automatically saved to `~/.config/rustyterm/config.toml`:
 
 ```toml
 theme = "default"
@@ -65,14 +65,14 @@ window_width = 800
 window_height = 600
 ```
 
-Edite este arquivo para personalizar:
+Edit this file to customize:
 
-- **theme** - Nome do tema de cores
-- **font_family** - Fonte do terminal
-- **font_size** - Tamanho da fonte
-- **scrollback_lines** - Quantidade de linhas no histórico
-- **window_width/height** - Tamanho inicial da janela
+- **theme** - Color theme name
+- **font_family** - Terminal font
+- **font_size** - Font size
+- **scrollback_lines** - History buffer size
+- **window_width/height** - Initial window size
 
-## Licença
+## License
 
 MIT
