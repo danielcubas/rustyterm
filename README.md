@@ -18,10 +18,43 @@ cd ~/Downloads
 sudo dpkg -i rustyterm_*.deb
 ```
 
+### Build from source
+
+1. Install dependencies:
+```bash
+sudo apt-get install -y libgtk-4-dev libvte-2.91-gtk4-dev
+```
+
+2. Clone and build:
+```bash
+git clone https://github.com/danielcubas/rustyterm.git
+cd rustyterm
+cargo build --release
+```
+
+3. Install (optional):
+```bash
+sudo cp target/release/rustyterm /usr/local/bin/
+```
+
 After installation, RustyTerm will be available in the application menu or can be launched from terminal:
 
 ```bash
 rustyterm
+```
+
+## Uninstallation
+
+### Ubuntu/Debian
+
+```bash
+sudo apt remove rustyterm
+```
+
+To also remove configuration files:
+
+```bash
+rm -rf ~/.config/rustyterm
 ```
 
 ## Features
