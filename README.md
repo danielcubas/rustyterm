@@ -10,8 +10,12 @@ RustyTerm is a simple and efficient terminal with multiple tabs support and cust
 
 ### Ubuntu/Debian
 
+1. Download the latest `.deb` package from [Releases](https://github.com/danielcubas/rustyterm/releases/latest)
+
+2. Install:
 ```bash
-sudo dpkg -i rustyterm_0.1.0-1_amd64.deb
+cd ~/Downloads
+sudo dpkg -i rustyterm_*.deb
 ```
 
 After installation, RustyTerm will be available in the application menu or can be launched from terminal:
