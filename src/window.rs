@@ -134,9 +134,37 @@ impl RustyTermWindow {
         });
         window.add_action(&set_theme_action);
 
+        // Copy action
+        let copy_action = SimpleAction::new("copy", None);
+        let tabs_clone = tabs.clone();
+        let notebook_clone = notebook.clone();
+        copy_action.connect_activate(move |_, _| {
+            if let Some(idx) = notebook_clone.current_page() {
+                if let Some(tab) = tabs_clone.borrow().get(idx as usize) {
+                    tab.borrow().terminal.copy_clipboard();
+                }
+            }
+        });
+        window.add_action(&copy_action);
+
+        // Paste action
+        let paste_action = SimpleAction::new("paste", None);
+        let tabs_clone = tabs.clone();
+        let notebook_clone = notebook.clone();
+        paste_action.connect_activate(move |_, _| {
+            if let Some(idx) = notebook_clone.current_page() {
+                if let Some(tab) = tabs_clone.borrow().get(idx as usize) {
+                    tab.borrow().terminal.paste_clipboard();
+                }
+            }
+        });
+        window.add_action(&paste_action);
+
         // Keyboard shortcuts
         app.set_accels_for_action("win.new-tab", &["<Ctrl><Shift>t"]);
         app.set_accels_for_action("win.close-tab", &["<Ctrl><Shift>w"]);
+        app.set_accels_for_action("win.copy", &["<Ctrl><Shift>c"]);
+        app.set_accels_for_action("win.paste", &["<Ctrl><Shift>v"]);
     }
 
     fn setup_new_tab_button(&self, button: &Button) {

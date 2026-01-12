@@ -1,5 +1,7 @@
 use gtk4::prelude::*;
-use gtk4::{Box, Button, Label, Orientation};
+use gtk4::{Box, Button, Label, Orientation, PopoverMenu, GestureClick};
+use gtk4::gio::Menu;
+use gtk4::gdk::Rectangle;
 use vte4::TerminalExt;
 use std::cell::RefCell;
 use std::rc::Rc;
@@ -42,6 +44,9 @@ impl Tab {
             title_label,
         }));
 
+        // Setup right-click context menu
+        Self::setup_context_menu(&tab);
+
         // Update title when window title changes
         let tab_weak = Rc::downgrade(&tab);
         tab.borrow().terminal.widget().connect_window_title_notify(move |term| {
@@ -70,5 +75,27 @@ impl Tab {
                 button.connect_clicked(move |_| callback());
             }
         }
+    }
+
+    fn setup_context_menu(tab: &Rc<RefCell<Self>>) {
+        let menu = Menu::new();
+        menu.append(Some("Copy"), Some("win.copy"));
+        menu.append(Some("Paste"), Some("win.paste"));
+
+        let popover = PopoverMenu::from_model(Some(&menu));
+        popover.set_parent(tab.borrow().terminal.widget());
+        popover.set_has_arrow(false);
+
+        let gesture = GestureClick::new();
+        gesture.set_button(3); // Right mouse button
+
+        let popover_clone = popover.clone();
+        gesture.connect_pressed(move |gesture, _, x, y| {
+            gesture.set_state(gtk4::EventSequenceState::Claimed);
+            popover_clone.set_pointing_to(Some(&Rectangle::new(x as i32, y as i32, 1, 1)));
+            popover_clone.popup();
+        });
+
+        tab.borrow().terminal.widget().add_controller(gesture);
     }
 }
