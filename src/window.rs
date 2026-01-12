@@ -8,6 +8,7 @@ use std::cell::RefCell;
 use std::rc::Rc;
 
 use crate::config::Config;
+use crate::resize::create_resize_overlay;
 use crate::tab::Tab;
 use crate::theme::{get_theme_by_name, get_themes};
 
@@ -27,6 +28,7 @@ impl RustyTermWindow {
             .title("RustyTerm")
             .default_width(config.borrow().window_width)
             .default_height(config.borrow().window_height)
+            .resizable(true)
             .build();
 
         let notebook = Notebook::new();
@@ -48,7 +50,10 @@ impl RustyTermWindow {
         // Main container
         let main_box = Box::new(Orientation::Vertical, 0);
         main_box.append(&notebook);
-        window.set_child(Some(&main_box));
+
+        // Wrap content with resize overlay
+        let resize_overlay = create_resize_overlay(&window, &main_box);
+        window.set_child(Some(&resize_overlay));
 
         let tabs: Rc<RefCell<Vec<Rc<RefCell<Tab>>>>> = Rc::new(RefCell::new(Vec::new()));
 
