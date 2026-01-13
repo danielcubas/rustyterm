@@ -36,9 +36,10 @@ impl RustyTermWindow {
         notebook.set_show_border(false);
         notebook.popup_enable();
 
-        // New tab button
+        // New tab button (action widget aligned to the right)
         let new_tab_btn = Button::from_icon_name("list-add-symbolic");
         new_tab_btn.set_tooltip_text(Some("New Tab (Ctrl+Shift+T)"));
+        new_tab_btn.add_css_class("add-tab-button");
         notebook.set_action_widget(&new_tab_btn, gtk4::PackType::End);
 
         // Header bar with menu
@@ -242,8 +243,16 @@ impl RustyTermWindow {
             return;
         }
 
+        // Determine which page to switch to after closing
+        let new_idx = if idx > 0 { idx - 1 } else { 0 };
+
+        // Remove the tab
+        let tab = tabs.borrow_mut().remove(idx);
+        tab.borrow_mut().cleanup();
         notebook.remove_page(Some(idx as u32));
-        tabs.borrow_mut().remove(idx);
+
+        // Switch to the appropriate tab
+        notebook.set_current_page(Some(new_idx as u32));
     }
 
     pub fn present(&self) {
