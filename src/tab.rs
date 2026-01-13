@@ -14,6 +14,7 @@ pub struct Tab {
     pub terminal: TerminalWidget,
     pub label_box: Box,
     pub title_label: Label,
+    popover: Option<PopoverMenu>,
 }
 
 impl Tab {
@@ -42,6 +43,7 @@ impl Tab {
             terminal,
             label_box,
             title_label,
+            popover: None,
         }));
 
         // Setup right-click context menu
@@ -97,5 +99,15 @@ impl Tab {
         });
 
         tab.borrow().terminal.widget().add_controller(gesture);
+
+        // Store popover reference for cleanup
+        tab.borrow_mut().popover = Some(popover);
+    }
+
+    /// Cleanup resources before destroying the tab
+    pub fn cleanup(&mut self) {
+        if let Some(popover) = self.popover.take() {
+            popover.unparent();
+        }
     }
 }
