@@ -243,15 +243,13 @@ impl RustyTermWindow {
             return;
         }
 
-        // Determine which page to switch to after closing
-        let new_idx = if idx > 0 { idx - 1 } else { 0 };
-
         // Remove the tab
         let tab = tabs.borrow_mut().remove(idx);
         tab.borrow_mut().cleanup();
         notebook.remove_page(Some(idx as u32));
 
-        // Switch to the appropriate tab
+        // Switch to the appropriate tab (previous one, or first if we closed tab 0)
+        let new_idx = idx.saturating_sub(1).min(tabs.borrow().len().saturating_sub(1));
         notebook.set_current_page(Some(new_idx as u32));
     }
 
